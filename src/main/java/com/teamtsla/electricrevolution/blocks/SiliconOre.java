@@ -1,6 +1,5 @@
 package com.teamtsla.electricrevolution.blocks;
 
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,10 +9,10 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class TinOre extends Block {
+public class SiliconOre extends Block {
 
 
-    public TinOre(String name) {
+    public SiliconOre(String name) {
         super(Material.ROCK);
         setUnlocalizedName(name);
         setRegistryName(name);

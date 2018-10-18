@@ -1,5 +1,14 @@
 item.copperingot.name=Copper Ingot
+item.lithiumingot.name=Lithium Ingot
+item.lodestoneingot.name=Lodestone Ingot
+item.aluminiumingot.name=Aluminium Ingot
+item.siliconingot.name=Silicon Ingot
+item.battery.name=Battery
+
+
 tile.copperore.name=Copper Ore
 tile.copperblock.name=Copper Block
-tile.tinore.name=Tin Ore
-item.tiningot.name=Tin Ingot
+tile.lithiumore.name=Lithium Ore
+tile.lodestoneore.name=Lodestone Ore
+tile.aluminiumore.name=Aluminium Ore
+tile.siliconore.name=Silicon Ore
