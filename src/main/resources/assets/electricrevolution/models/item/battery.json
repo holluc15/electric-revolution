@@ -1,7 +1,7 @@
 {
   "parent" : "builtin/generated",
   "textures": {
-    "layer0" : "electricrevolution:items/battery"
+    "layer0" : "electricrevolution:items/battery_empty"
   },
   "display": {
     "ground": {

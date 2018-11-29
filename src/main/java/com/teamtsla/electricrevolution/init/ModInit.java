@@ -5,6 +5,7 @@ import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.*;
 import com.teamtsla.electricrevolution.items.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -16,7 +17,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.lwjgl.openal.AL;
 
 import java.util.Objects;
 
@@ -26,7 +26,7 @@ public class ModInit {
     //Items
     public static Item COPPER_INGOT;
     public static Item LITHIUM_INGOT;
-    public static Item LODESTONE_INGOT;
+    public static Item MAGNET;
     public static Item ALUMINIUM_INGOT;
     public static Item SILICON_INGOT;
 
@@ -44,7 +44,7 @@ public class ModInit {
         //Items
         COPPER_INGOT = new CopperIngot("copperingot");
         LITHIUM_INGOT =  new LithiumIngot("lithiumingot");
-        LODESTONE_INGOT = new LodestoneIngot("lodestoneingot");
+        MAGNET = new Magnet("magnet");
         ALUMINIUM_INGOT = new AluminiumIngot("aluminiumingot");
 
         BATTERY = new Battery("battery");
@@ -65,7 +65,7 @@ public class ModInit {
         //Items
         event.getRegistry().registerAll(COPPER_INGOT);
         event.getRegistry().registerAll(LITHIUM_INGOT);
-        event.getRegistry().registerAll(LODESTONE_INGOT);
+        event.getRegistry().registerAll(MAGNET);
         event.getRegistry().registerAll(ALUMINIUM_INGOT);
         event.getRegistry().registerAll(SILICON_INGOT);
         event.getRegistry().registerAll(BATTERY);
@@ -118,7 +118,7 @@ public class ModInit {
     private static void loadItems() {
         registerRenderer(COPPER_INGOT);
         registerRenderer(LITHIUM_INGOT);
-        registerRenderer(LODESTONE_INGOT);
+        registerRenderer(MAGNET);
         registerRenderer(ALUMINIUM_INGOT);
         registerRenderer(SILICON_INGOT);
         registerRenderer(BATTERY);
@@ -137,7 +137,7 @@ public class ModInit {
     private static void loadSmeltingRecepies() {
         GameRegistry.addSmelting(new ItemStack(ModInit.COPPER_ORE),new ItemStack(COPPER_INGOT),1f);
         GameRegistry.addSmelting(new ItemStack(ModInit.LITHIUM_ORE),new ItemStack(LITHIUM_INGOT),1f);
-        GameRegistry.addSmelting(new ItemStack(ModInit.LODESTONE_ORE),new ItemStack(LODESTONE_INGOT),1f);
+        GameRegistry.addSmelting(new ItemStack(ModInit.LODESTONE_ORE),new ItemStack(MAGNET),1f);
         GameRegistry.addSmelting(new ItemStack(ModInit.ALUMINIUM_ORE),new ItemStack(ALUMINIUM_INGOT),1f);
         GameRegistry.addSmelting(new ItemStack(ModInit.SILICON_ORE),new ItemStack(SILICON_INGOT),1f);
 

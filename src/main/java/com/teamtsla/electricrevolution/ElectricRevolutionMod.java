@@ -24,7 +24,6 @@ public class ElectricRevolutionMod
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        System.out.println("Hello World");
         ModInit.init();
 
     }
