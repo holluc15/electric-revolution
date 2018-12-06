@@ -2,23 +2,23 @@ package com.teamtsla.electricrevolution.blocks;
 
 import com.teamtsla.electricrevolution.init.ModInit;
 import net.minecraft.block.BlockDaylightDetector;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class SolarCell extends BlockDaylightDetector implements ITileEntityProvider {
+public class SolarCell extends BlockDaylightDetector implements IItemHandler {
 
 
     private boolean inverted;
-    public int POWER_BLOCK;
     public SolarCell(String name,boolean inverted) {
 
         super(inverted);
@@ -70,8 +70,7 @@ public class SolarCell extends BlockDaylightDetector implements ITileEntityProvi
             {
                 worldIn.setBlockState(pos, iblockstate.withProperty(POWER, Integer.valueOf(i)), 3);
             }
-            System.out.println((Integer) iblockstate.getValue(POWER) + " POWER");
-            POWER_BLOCK = iblockstate.getValue(POWER);
+            System.out.println(((Integer)iblockstate.getValue(POWER)).intValue() + " POWER");
         }
     }
 
@@ -80,5 +79,37 @@ public class SolarCell extends BlockDaylightDetector implements ITileEntityProvi
         return false;
     }
 
+    @Override
+    public boolean canProvidePower(IBlockState state) {
+        return true;
+    }
 
+
+    @Override
+    public int getSlots() {
+        return 1;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return new ItemStack(ModInit.BATTERY);
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+        return stack;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        return new ItemStack(ModInit.BATTERY,amount);
+    }
+
+    @Override
+    public int getSlotLimit(int slot) {
+        return 1;
+    }
 }
