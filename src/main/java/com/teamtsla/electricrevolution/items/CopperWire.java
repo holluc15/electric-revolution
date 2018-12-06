@@ -4,9 +4,9 @@ import com.teamtsla.electricrevolution.init.ModInit;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class SiliconIngot extends Item {
+public class CopperWire extends Item {
 
-    public SiliconIngot(String name) {
+    public CopperWire(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(ModInit.electricRevolutionTab);

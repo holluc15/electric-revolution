@@ -1,7 +1,7 @@
 {
   "parent" : "builtin/generated",
   "textures": {
-    "layer0" : "electricrevolution:items/battery_empty"
+    "layer0" : "electricrevolution:items/copperwire"
   },
   "display": {
     "ground": {

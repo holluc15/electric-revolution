@@ -4,6 +4,7 @@ item.magnet.name=Magnet
 item.aluminiumingot.name=Aluminium Ingot
 item.siliconingot.name=Silicon Ingot
 item.battery.name=Battery
+item.copperwire.name=Copper Wire
 
 
 tile.copperore.name=Copper Ore
@@ -12,3 +13,4 @@ tile.lithiumore.name=Lithium Ore
 tile.lodestoneore.name=Magnetic Ore
 tile.aluminiumore.name=Aluminium Ore
 tile.siliconore.name=Silicon Ore
+tile.solarcell.name=Solar Cell

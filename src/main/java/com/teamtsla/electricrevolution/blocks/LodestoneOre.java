@@ -1,5 +1,6 @@
 package com.teamtsla.electricrevolution.blocks;
 
+import com.teamtsla.electricrevolution.init.ModInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,7 +17,7 @@ public class LodestoneOre extends Block {
         super(Material.ROCK);
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        setCreativeTab(ModInit.electricRevolutionTab);
 
         //Config
         this.setHardness(2f);
