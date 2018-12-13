@@ -3,6 +3,9 @@ package com.teamtsla.electricrevolution.init;
 
 import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.*;
+import com.teamtsla.electricrevolution.glowstonegenerator.BlockGlowstoneGenerator;
+import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
+import com.teamtsla.electricrevolution.gui.GuiHandler;
 import com.teamtsla.electricrevolution.items.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -17,6 +20,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Objects;
@@ -41,6 +45,9 @@ public class ModInit {
     public static Block SILICON_ORE;
     public static Block SOLAR_CELL;
 
+    public static Block FURNACE_GENERATOR;
+    public static Block GLOWSTONE_GENERATOR;
+
     public static CreativeTabs electricRevolutionTab = new CreativeTabs("electricRevolution"){
         @Override
         public ItemStack getTabIconItem() {
@@ -50,7 +57,6 @@ public class ModInit {
     };
 
     public static void init() {
-
 
         //Items
         COPPER_INGOT = new CopperIngot("copperingot");
@@ -71,6 +77,9 @@ public class ModInit {
         SILICON_INGOT = new SiliconIngot("siliconingot");
 
         SOLAR_CELL = new SolarCell("solarcell",false);
+
+        FURNACE_GENERATOR = new FurnaceGenerator("furnace_generator");
+        GLOWSTONE_GENERATOR = new BlockGlowstoneGenerator("glowstone_generator");
 
     }
 
@@ -94,6 +103,8 @@ public class ModInit {
         event.getRegistry().register(new ItemBlock(SILICON_ORE).setRegistryName(Objects.requireNonNull(SILICON_ORE.getRegistryName())));
         event.getRegistry().register(new ItemBlock(SOLAR_CELL).setRegistryName(Objects.requireNonNull(SOLAR_CELL.getRegistryName())));
 
+        //event.getRegistry().register(new ItemBlock(FURNACE_GENERATOR).setRegistryName(Objects.requireNonNull(FURNACE_GENERATOR.getRegistryName())));
+        event.getRegistry().register(new ItemBlock(GLOWSTONE_GENERATOR).setRegistryName(Objects.requireNonNull(GLOWSTONE_GENERATOR.getRegistryName())));
     }
 
 
@@ -107,7 +118,11 @@ public class ModInit {
         event.getRegistry().registerAll(SILICON_ORE);
         event.getRegistry().registerAll(SOLAR_CELL);
 
-
+        //event.getRegistry().registerAll(FURNACE_GENERATOR);
+        event.getRegistry().registerAll(GLOWSTONE_GENERATOR);
+        NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
+        GameRegistry.registerTileEntity(TileEntityGlowstoneGenerator.class,
+                new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_generator"));
     }
 
     @SubscribeEvent
@@ -131,6 +146,9 @@ public class ModInit {
         registerRenderer(Item.getItemFromBlock(ALUMINIUM_ORE));
         registerRenderer(Item.getItemFromBlock(SILICON_ORE));
         registerRenderer(Item.getItemFromBlock(SOLAR_CELL));
+
+        //registerRenderer(Item.getItemFromBlock(FURNACE_GENERATOR));
+        registerRenderer(Item.getItemFromBlock(GLOWSTONE_GENERATOR));
     }
 
     private static void loadItems() {

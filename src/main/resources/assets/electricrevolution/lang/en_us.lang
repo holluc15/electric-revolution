@@ -1,3 +1,5 @@
+itemGroup.electricRevolution=Electric Revolution
+
 item.copperingot.name=Copper Ingot
 item.lithiumingot.name=Lithium Ingot
 item.magnet.name=Magnet
@@ -14,3 +16,7 @@ tile.lodestoneore.name=Magnetic Ore
 tile.aluminiumore.name=Aluminium Ore
 tile.siliconore.name=Silicon Ore
 tile.solarcell.name=Solar Cell
+tile.furnace_generator.name=Furnace Generator
+tile.glowstone_generator.name=Glowstone Generator
+
+container.glowstone_generator=Glowstone Generator

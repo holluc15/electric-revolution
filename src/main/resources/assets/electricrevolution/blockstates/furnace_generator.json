@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "generating=false,facing=north": { "model": "electricrevolution:furnace_generator" },
+    "generating=false,facing=east": { "model": "electricrevolution:furnace_generator", "y": 90 },
+    "generating=false,facing=south": { "model": "electricrevolution:furnace_generator", "y": 180 },
+    "generating=false,facing=west": { "model": "electricrevolution:furnace_generator", "y": 270 },
+    "generating=true,facing=north": { "model": "electricrevolution:active_furnace_generator" },
+    "generating=true,facing=east": { "model": "electricrevolution:active_furnace_generator", "y": 90 },
+    "generating=true,facing=south": { "model": "electricrevolution:active_furnace_generator", "y": 180 },
+    "generating=true,facing=west": { "model": "electricrevolution:active_furnace_generator", "y": 270 }
+  }
+}

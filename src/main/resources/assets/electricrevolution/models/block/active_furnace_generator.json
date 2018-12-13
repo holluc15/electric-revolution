@@ -1,0 +1,13 @@
+{
+  "parent": "block/orientable",
+  "textures":
+  {
+    "particle": "electricrevolution:blocks/furnace_generator_front_off",
+    "up": "electricrevolution:blocks/furnace_generator_side",
+    "down": "electricrevolution:blocks/furnace_generator_side",
+    "north": "electricrevolution:blocks/furnace_generator_front_on",
+    "east": "electricrevolution:blocks/furnace_generator_side",
+    "south": "electricrevolution:blocks/furnace_generator_side",
+    "west": "electricrevolution:blocks/furnace_generator_side"
+  }
+}
