@@ -20,3 +20,4 @@ tile.furnace_generator.name=Furnace Generator
 tile.glowstone_generator.name=Glowstone Generator
 
 container.glowstone_generator=Glowstone Generator
+container.solarcell=Solar Cell

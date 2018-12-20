@@ -7,10 +7,11 @@ import com.teamtsla.electricrevolution.glowstonegenerator.BlockGlowstoneGenerato
 import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
 import com.teamtsla.electricrevolution.gui.GuiHandler;
 import com.teamtsla.electricrevolution.items.*;
+import com.teamtsla.electricrevolution.solarcell.SolarCell;
+import com.teamtsla.electricrevolution.solarcell.TileEntitySolarCell;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -51,7 +52,7 @@ public class ModInit {
     public static CreativeTabs electricRevolutionTab = new CreativeTabs("electricRevolution"){
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(SOLAR_CELL);
+            return new ItemStack(GLOWSTONE_GENERATOR);
         }
 
     };
@@ -76,7 +77,7 @@ public class ModInit {
         SILICON_ORE = new SiliconOre("siliconore");
         SILICON_INGOT = new SiliconIngot("siliconingot");
 
-        SOLAR_CELL = new SolarCell("solarcell",false);
+        SOLAR_CELL = new SolarCell("solarcell");
 
         FURNACE_GENERATOR = new FurnaceGenerator("furnace_generator");
         GLOWSTONE_GENERATOR = new BlockGlowstoneGenerator("glowstone_generator");
@@ -117,12 +118,15 @@ public class ModInit {
         event.getRegistry().registerAll(ALUMINIUM_ORE);
         event.getRegistry().registerAll(SILICON_ORE);
         event.getRegistry().registerAll(SOLAR_CELL);
+        NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
+        GameRegistry.registerTileEntity(TileEntityGlowstoneGenerator.class,
+                new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_generator"));
 
         //event.getRegistry().registerAll(FURNACE_GENERATOR);
         event.getRegistry().registerAll(GLOWSTONE_GENERATOR);
         NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
-        GameRegistry.registerTileEntity(TileEntityGlowstoneGenerator.class,
-                new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_generator"));
+        GameRegistry.registerTileEntity(TileEntitySolarCell.class,
+                new ResourceLocation(ElectricRevolutionMod.MODID + ":solarcell"));
     }
 
     @SubscribeEvent
