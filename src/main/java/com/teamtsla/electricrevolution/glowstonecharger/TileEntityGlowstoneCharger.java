@@ -1,9 +1,10 @@
-package com.teamtsla.electricrevolution.solarcell;
+package com.teamtsla.electricrevolution.glowstonecharger;
 
-
+import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.BaseEnergyStorage;
 import com.teamtsla.electricrevolution.init.ModInit;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -11,8 +12,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -20,9 +19,9 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class TileEntitySolarCell extends TileEntity implements ITickable
+public class TileEntityGlowstoneCharger extends TileEntity implements ITickable
 {
-    public ItemStackHandler handler = new ItemStackHandler(1);
+    public ItemStackHandler handler = new ItemStackHandler(2);
     private BaseEnergyStorage storage = new BaseEnergyStorage(100000);
 
     private String customName;
@@ -37,14 +36,12 @@ public class TileEntitySolarCell extends TileEntity implements ITickable
         {
             if(cookTime == MAX_COOKING_TIME)
             {
-                int receivedEnergy = this.storage.receiveEnergy(getFuelValue(handler.getStackInSlot(0),this.world),false);
-                System.out.println(receivedEnergy + " RECEIVED ENERGY");
+                int receivedEnergy = this.storage.receiveEnergy(getFuelValue(handler.getStackInSlot(0)),false);
 
                 handler.getStackInSlot(0).shrink(1);
                 cookTime = 0;
             }
             else {
-                System.out.println(cookTime + " COOK TIME");
                 cookTime++;
             }
         }
@@ -52,25 +49,35 @@ public class TileEntitySolarCell extends TileEntity implements ITickable
         {
             cookTime = 0;
         }
+
+        if(storage.canExtract() && !handler.getStackInSlot(1).isEmpty() && handler.getStackInSlot(1).getItem() == ModInit.BATTERY)
+        {
+            BaseEnergyStorage battery = (BaseEnergyStorage) handler.getStackInSlot(1).getCapability(CapabilityEnergy.ENERGY, null);
+
+            if(battery.canReceive())
+            {
+                int extractableEnergy = storage.extractEnergy(battery.getChargeSpeed(), true);
+                int receiveableEnergy = battery.receiveEnergy(extractableEnergy, true);
+                //System.out.println("Ex["+extractableEnergy+"] Re["+receiveableEnergy+"]");
+                int transferedEnergy = Math.min(extractableEnergy, receiveableEnergy);
+
+                storage.extractEnergy(transferedEnergy, false);
+                battery.receiveEnergy(transferedEnergy, false);
+            }
+        }
+
         markDirty();
     }
 
     public boolean isItemFuel(ItemStack stack)
     {
-        return getFuelValue(stack,this.world) > 0;
+        return getFuelValue(stack) > 0;
     }
 
-    public int getFuelValue(ItemStack stack, World worldIn)
+    public int getFuelValue(ItemStack stack)
     {
-        if (worldIn.provider.hasSkyLight() &&  stack.getItem() == ModInit.BATTERY) {
-            int light = worldIn.getLightFor(EnumSkyBlock.SKY, pos) - worldIn.getSkylightSubtracted();
-
-            if (light > 0) {
-                return 1000;
-            }
-        }
-        return 0;
-
+        if(stack.getItem() == Items.GLOWSTONE_DUST) return 1000;
+        else return 0;
     }
 
     @Override
@@ -123,7 +130,7 @@ public class TileEntitySolarCell extends TileEntity implements ITickable
     @Override
     public ITextComponent getDisplayName()
     {
-        return new TextComponentTranslation("container.solarcell");
+        return new TextComponentTranslation("container.glowstone_charger");
     }
 
     public int getEnergyStored()
@@ -141,19 +148,6 @@ public class TileEntitySolarCell extends TileEntity implements ITickable
         return this.cookTime;
     }
 
-    public void setField(int id, int value)
-    {
-        switch (id)
-        {
-            case 0:
-                this.storage.setEnergy(value);
-                break;
-            case 1:
-                this.cookTime = value;
-                break;
-        }
-    }
-
     public int getField(int id)
     {
         switch (id)
@@ -167,6 +161,18 @@ public class TileEntitySolarCell extends TileEntity implements ITickable
         }
     }
 
+    public void setField(int id, int value)
+    {
+        switch (id)
+        {
+            case 0:
+                this.storage.setEnergy(value);
+                break;
+            case 1:
+                this.cookTime = value;
+                break;
+        }
+    }
 
     public boolean isUsableByPlayer(EntityPlayer player)
     {

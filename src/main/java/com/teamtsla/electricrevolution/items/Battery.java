@@ -1,51 +1,39 @@
 package com.teamtsla.electricrevolution.items;
 
+import com.teamtsla.electricrevolution.blocks.BaseEnergyStorage;
+import com.teamtsla.electricrevolution.capabilities.CapabilityProviderEnergyStorage;
 import com.teamtsla.electricrevolution.init.ModInit;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.energy.CapabilityEnergy;
 
-public class Battery extends Item implements IEnergyStorage {
+import javax.annotation.Nullable;
+import java.util.List;
 
-    private int energy = 0;
-    private final int MAX_ENERGY = 100;
+public class Battery extends Item {
 
     public Battery(String name) {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setMaxDamage(10);
+        this.setMaxStackSize(1);
         setCreativeTab(ModInit.electricRevolutionTab);
     }
 
+    @Nullable
     @Override
-    public int receiveEnergy(int maxReceive, boolean simulate) {
-        energy += maxReceive;
-        return 0;
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+        return new CapabilityProviderEnergyStorage();
     }
 
     @Override
-    public int extractEnergy(int maxExtract, boolean simulate) {
-        energy -= maxExtract;
-        return 1;
-    }
-
-    @Override
-    public int getEnergyStored() {
-        return energy;
-    }
-
-    @Override
-    public int getMaxEnergyStored() {
-        return MAX_ENERGY;
-    }
-
-    @Override
-    public boolean canExtract() {
-        return true;
-    }
-
-    @Override
-    public boolean canReceive() {
-        return true;
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    {
+        BaseEnergyStorage bes = (BaseEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
+        tooltip.add(bes.getEnergyStored()+"/"+bes.getMaxEnergyStored());
     }
 }

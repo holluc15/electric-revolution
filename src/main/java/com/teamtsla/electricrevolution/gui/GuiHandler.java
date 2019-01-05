@@ -1,6 +1,9 @@
 package com.teamtsla.electricrevolution.gui;
 
 import com.teamtsla.electricrevolution.ElectricRevolutionMod;
+import com.teamtsla.electricrevolution.glowstonecharger.ContainerGlowstoneCharger;
+import com.teamtsla.electricrevolution.glowstonecharger.GuiGlowstoneCharger;
+import com.teamtsla.electricrevolution.glowstonecharger.TileEntityGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonegenerator.ContainerGlowstoneGenerator;
 import com.teamtsla.electricrevolution.glowstonegenerator.GuiGlowstoneGenerator;
 import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
@@ -28,6 +31,10 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
         }
+        if(ID == ElectricRevolutionMod.GUI_GLOWSTONE_CHARGER) {
+            return new ContainerGlowstoneCharger(player.inventory,
+                    (TileEntityGlowstoneCharger) world.getTileEntity(new BlockPos(x,y,z)));
+        }
         return null;
     }
 
@@ -42,6 +49,10 @@ public class GuiHandler implements IGuiHandler {
         if(ID == ElectricRevolutionMod.GUI_SOLAR_CELL) {
             return new GuiSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
+        }
+        if(ID == ElectricRevolutionMod.GUI_GLOWSTONE_CHARGER) {
+            return new GuiGlowstoneCharger(player.inventory,
+                    (TileEntityGlowstoneCharger) world.getTileEntity(new BlockPos(x,y,z)));
         }
         return null;
     }

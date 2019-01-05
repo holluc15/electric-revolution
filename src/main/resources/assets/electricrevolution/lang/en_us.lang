@@ -21,3 +21,6 @@ tile.glowstone_generator.name=Glowstone Generator
 
 container.glowstone_generator=Glowstone Generator
 container.solarcell=Solar Cell
+
+container.glowstone_charger=Glowstone Charger
+tile.glowstone_charger.name=Glowstone Charger

@@ -3,6 +3,8 @@ package com.teamtsla.electricrevolution.init;
 
 import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.*;
+import com.teamtsla.electricrevolution.glowstonecharger.BlockGlowstoneCharger;
+import com.teamtsla.electricrevolution.glowstonecharger.TileEntityGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonegenerator.BlockGlowstoneGenerator;
 import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
 import com.teamtsla.electricrevolution.gui.GuiHandler;
@@ -48,6 +50,7 @@ public class ModInit {
 
     public static Block FURNACE_GENERATOR;
     public static Block GLOWSTONE_GENERATOR;
+    public static Block GLOWSTONE_CHARGER;
 
     public static CreativeTabs electricRevolutionTab = new CreativeTabs("electricRevolution"){
         @Override
@@ -81,6 +84,7 @@ public class ModInit {
 
         FURNACE_GENERATOR = new FurnaceGenerator("furnace_generator");
         GLOWSTONE_GENERATOR = new BlockGlowstoneGenerator("glowstone_generator");
+        GLOWSTONE_CHARGER = new BlockGlowstoneCharger("glowstone_charger");
 
     }
 
@@ -106,6 +110,8 @@ public class ModInit {
 
         //event.getRegistry().register(new ItemBlock(FURNACE_GENERATOR).setRegistryName(Objects.requireNonNull(FURNACE_GENERATOR.getRegistryName())));
         event.getRegistry().register(new ItemBlock(GLOWSTONE_GENERATOR).setRegistryName(Objects.requireNonNull(GLOWSTONE_GENERATOR.getRegistryName())));
+        event.getRegistry().register(new ItemBlock(GLOWSTONE_CHARGER).setRegistryName(Objects.requireNonNull(GLOWSTONE_CHARGER.getRegistryName())));
+
     }
 
 
@@ -121,6 +127,11 @@ public class ModInit {
         NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
         GameRegistry.registerTileEntity(TileEntityGlowstoneGenerator.class,
                 new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_generator"));
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
+        GameRegistry.registerTileEntity(TileEntityGlowstoneCharger.class,
+                new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_charger"));
+        event.getRegistry().registerAll(GLOWSTONE_CHARGER);
 
         //event.getRegistry().registerAll(FURNACE_GENERATOR);
         event.getRegistry().registerAll(GLOWSTONE_GENERATOR);
@@ -153,6 +164,7 @@ public class ModInit {
 
         //registerRenderer(Item.getItemFromBlock(FURNACE_GENERATOR));
         registerRenderer(Item.getItemFromBlock(GLOWSTONE_GENERATOR));
+        registerRenderer(Item.getItemFromBlock(GLOWSTONE_CHARGER));
     }
 
     private static void loadItems() {
