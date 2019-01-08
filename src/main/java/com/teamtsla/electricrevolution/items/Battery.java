@@ -27,7 +27,7 @@ public class Battery extends Item {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new CapabilityProviderEnergyStorage();
+        return new CapabilityProviderEnergyStorage(10000, 1000);
     }
 
     @Override

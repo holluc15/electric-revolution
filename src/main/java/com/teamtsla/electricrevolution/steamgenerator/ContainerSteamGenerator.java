@@ -1,4 +1,4 @@
-package com.teamtsla.electricrevolution.glowstonegenerator;
+package com.teamtsla.electricrevolution.steamgenerator;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,19 +9,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.minecraft.block.BlockFurnace;
 
-public class ContainerGlowstoneGenerator extends Container
+public class ContainerSteamGenerator extends Container
 {
-    private final TileEntityGlowstoneGenerator tileentity;
+    private final TileEntitySteamGenerator tileentity;
     private int energy, cookTime;
 
-    public ContainerGlowstoneGenerator(InventoryPlayer player, TileEntityGlowstoneGenerator tileentity)
+    public ContainerSteamGenerator(InventoryPlayer player, TileEntitySteamGenerator tileentity)
     {
         this.tileentity = tileentity;
         IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        this.addSlotToContainer(new SlotItemHandler(handler, 0, 80, 33));
+        this.addSlotToContainer(new SlotItemHandler(handler, 0, 56, 17));   // Slot for Water
+        this.addSlotToContainer(new SlotItemHandler(handler, 1, 56, 53));   // Slot for Fuel (e.g.: Wood, Coal,...)
+        this.addSlotToContainer(new SlotItemHandler(handler, 2, 116, 35));  // Slot for Battery
 
         for(int y = 0; y < 3; y++)
         {

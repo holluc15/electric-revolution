@@ -1,7 +1,10 @@
-package com.teamtsla.electricrevolution.glowstonegenerator;
+package com.teamtsla.electricrevolution.steamgenerator;
 
+import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.BaseEnergyStorage;
+import com.teamtsla.electricrevolution.init.ModInit;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,9 +20,9 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class TileEntityGlowstoneGenerator extends TileEntity implements ITickable
+public class TileEntitySteamGenerator extends TileEntity implements ITickable
 {
-    public ItemStackHandler handler = new ItemStackHandler(1);
+    public ItemStackHandler handler = new ItemStackHandler(3);
     private BaseEnergyStorage storage = new BaseEnergyStorage(100000);
 
     private String customName;
@@ -30,24 +33,70 @@ public class TileEntityGlowstoneGenerator extends TileEntity implements ITickabl
     @Override
     public void update()
     {
-        if(!handler.getStackInSlot(0).isEmpty() && isItemFuel(handler.getStackInSlot(0)) && this.storage.canReceive())
+        //System.out.println("START: "+cookTime);
+        if(!handler.getStackInSlot(1).isEmpty() && isItemFuel(handler.getStackInSlot(1)) &&
+           !handler.getStackInSlot(0).isEmpty() && handler.getStackInSlot(0).getItem() == Items.WATER_BUCKET)
         {
-            if(cookTime == MAX_COOKING_TIME)
+            if(!handler.getStackInSlot(2).isEmpty() && handler.getStackInSlot(2).getItem() == ModInit.BATTERY &&
+                ((BaseEnergyStorage) handler.getStackInSlot(2).getCapability(CapabilityEnergy.ENERGY, null)).canReceive())
             {
-                int receivedEnergy = this.storage.receiveEnergy(getFuelValue(handler.getStackInSlot(0)),false);
+                BaseEnergyStorage battery = (BaseEnergyStorage) handler.getStackInSlot(2).getCapability(CapabilityEnergy.ENERGY, null);
 
-                handler.getStackInSlot(0).shrink(1);
-                cookTime = 0;
+                if(cookTime == MAX_COOKING_TIME)
+                {
+                    battery.receiveEnergy(getFuelValue(handler.getStackInSlot(1)),false);
+
+                    handler.getStackInSlot(1).shrink(1);
+                    cookTime = 0;
+                }
+                else {
+                    cookTime++;
+                }
             }
             else {
-                cookTime++;
+                cookTime = 0;
             }
         }
-        else if(cookTime > 0 && handler.getStackInSlot(0).isEmpty())
+        else if(cookTime > 0 && (handler.getStackInSlot(0).isEmpty() || handler.getStackInSlot(1).isEmpty()))
         {
             cookTime = 0;
         }
+        //System.out.println("END: "+cookTime);
+/*
+        if(storage.canExtract() && !handler.getStackInSlot(2).isEmpty() && handler.getStackInSlot(2).getItem() == ModInit.BATTERY)
+        {
+            BaseEnergyStorage battery = (BaseEnergyStorage) handler.getStackInSlot(2).getCapability(CapabilityEnergy.ENERGY, null);
+
+            if(battery.canReceive())
+            {
+                int extractableEnergy = storage.extractEnergy(battery.getChargeSpeed(), true);
+                int receiveableEnergy = battery.receiveEnergy(extractableEnergy, true);
+                //System.out.println("Ex["+extractableEnergy+"] Re["+receiveableEnergy+"]");
+                int transferedEnergy = Math.min(extractableEnergy, receiveableEnergy);
+
+                storage.extractEnergy(transferedEnergy, false);
+                battery.receiveEnergy(transferedEnergy, false);
+            }
+        }
+*/
         markDirty();
+    }
+
+    public int getPercentageFromBattery()
+    {
+        int percentage = 0;
+
+        if(!handler.getStackInSlot(2).isEmpty())
+        {
+            BaseEnergyStorage battery = (BaseEnergyStorage) handler.getStackInSlot(2).getCapability(CapabilityEnergy.ENERGY, null);
+
+            int capacity = battery.getMaxEnergyStored();
+            int energyStored = battery.getEnergyStored();
+
+            percentage = Math.round(((float)energyStored / (float)capacity)* 100f);
+        }
+
+        return percentage;
     }
 
     public boolean isItemFuel(ItemStack stack)
@@ -57,7 +106,12 @@ public class TileEntityGlowstoneGenerator extends TileEntity implements ITickabl
 
     public int getFuelValue(ItemStack stack)
     {
-        if(stack.getItem() == Items.GLOWSTONE_DUST) return 1000;
+        if(stack.getItem() == Items.LAVA_BUCKET) return 10000;
+        else if(stack.getItem() == new ItemStack(Blocks.COAL_BLOCK).getItem()) return 5000;
+        else if(stack.getItem() == Items.COAL) return 1000;
+        else if(stack.getItem() == new ItemStack(Blocks.LOG).getItem()) return 1000;
+        else if(stack.getItem() == new ItemStack(Blocks.PLANKS).getItem()) return 1000;
+        else if(stack.getItem() == Items.STICK) return 500;
         else return 0;
     }
 
@@ -111,7 +165,7 @@ public class TileEntityGlowstoneGenerator extends TileEntity implements ITickabl
     @Override
     public ITextComponent getDisplayName()
     {
-        return new TextComponentTranslation("container.glowstone_generator");
+        return new TextComponentTranslation("container.steam_generator");
     }
 
     public int getEnergyStored()

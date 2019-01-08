@@ -1,4 +1,4 @@
-package com.teamtsla.electricrevolution.tileentities;
+/*package com.teamtsla.electricrevolution.tileentities;
 
 import com.teamtsla.electricrevolution.blocks.FurnaceGenerator;
 import com.teamtsla.electricrevolution.recipes.FurnaceGeneratorRecipes;
@@ -244,3 +244,4 @@ public class TileEntityFurnaceGenerator extends TileEntity implements ITickable 
         }
     }
 }
+*/

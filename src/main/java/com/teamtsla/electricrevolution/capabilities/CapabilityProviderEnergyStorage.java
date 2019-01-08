@@ -15,7 +15,12 @@ public class CapabilityProviderEnergyStorage implements ICapabilityProvider, INB
 
     //public static final ResourceLocation NAME = new ResourceLocation("electricrevolution", "battery_empty");
 
-    private final BaseEnergyStorage storage = new BaseEnergyStorage(10000, 25);
+    private final BaseEnergyStorage storage;
+
+    public CapabilityProviderEnergyStorage(int capacity, int transferSpeed)
+    {
+        storage = new BaseEnergyStorage(capacity, transferSpeed);
+    }
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)

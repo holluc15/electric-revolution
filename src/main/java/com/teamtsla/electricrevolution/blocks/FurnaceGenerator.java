@@ -1,4 +1,4 @@
-package com.teamtsla.electricrevolution.blocks;
+/*package com.teamtsla.electricrevolution.blocks;
 
 import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.init.ModInit;
@@ -107,7 +107,7 @@ public class FurnaceGenerator extends Block implements ITileEntityProvider {
             worldIn.setBlockState(pos, ModInit.FURNACE_GENERATOR.getDefaultState()
                     .withProperty(FACING, state.getValue(FACING)).withProperty(GENERATING, false), 3);
         }
-        */
+        
         if(tileEntity != null) {
             tileEntity.validate();
             worldIn.setTileEntity(pos, tileEntity);
@@ -185,3 +185,4 @@ public class FurnaceGenerator extends Block implements ITileEntityProvider {
         return new TileEntityFurnaceGenerator();
     }
 }
+*/

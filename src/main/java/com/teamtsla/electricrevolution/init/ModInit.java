@@ -5,12 +5,12 @@ import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.*;
 import com.teamtsla.electricrevolution.glowstonecharger.BlockGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonecharger.TileEntityGlowstoneCharger;
-import com.teamtsla.electricrevolution.glowstonegenerator.BlockGlowstoneGenerator;
-import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
 import com.teamtsla.electricrevolution.gui.GuiHandler;
 import com.teamtsla.electricrevolution.items.*;
 import com.teamtsla.electricrevolution.solarcell.SolarCell;
 import com.teamtsla.electricrevolution.solarcell.TileEntitySolarCell;
+import com.teamtsla.electricrevolution.steamgenerator.BlockSteamGenerator;
+import com.teamtsla.electricrevolution.steamgenerator.TileEntitySteamGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -46,16 +46,16 @@ public class ModInit {
     public static Block LODESTONE_ORE;
     public static Block ALUMINIUM_ORE;
     public static Block SILICON_ORE;
-    public static Block SOLAR_CELL;
 
-    public static Block FURNACE_GENERATOR;
-    public static Block GLOWSTONE_GENERATOR;
+    public static Block SOLAR_CELL;
     public static Block GLOWSTONE_CHARGER;
+    public static Block STEAM_GENERATOR;
+
 
     public static CreativeTabs electricRevolutionTab = new CreativeTabs("electricRevolution"){
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(GLOWSTONE_GENERATOR);
+            return new ItemStack(GLOWSTONE_CHARGER);
         }
 
     };
@@ -81,11 +81,8 @@ public class ModInit {
         SILICON_INGOT = new SiliconIngot("siliconingot");
 
         SOLAR_CELL = new SolarCell("solarcell");
-
-        FURNACE_GENERATOR = new FurnaceGenerator("furnace_generator");
-        GLOWSTONE_GENERATOR = new BlockGlowstoneGenerator("glowstone_generator");
         GLOWSTONE_CHARGER = new BlockGlowstoneCharger("glowstone_charger");
-
+        STEAM_GENERATOR = new BlockSteamGenerator("steam_generator");
     }
 
 
@@ -106,12 +103,10 @@ public class ModInit {
         event.getRegistry().register(new ItemBlock(LODESTONE_ORE).setRegistryName(Objects.requireNonNull(LODESTONE_ORE.getRegistryName())));
         event.getRegistry().register(new ItemBlock(ALUMINIUM_ORE).setRegistryName(Objects.requireNonNull(ALUMINIUM_ORE.getRegistryName())));
         event.getRegistry().register(new ItemBlock(SILICON_ORE).setRegistryName(Objects.requireNonNull(SILICON_ORE.getRegistryName())));
+
         event.getRegistry().register(new ItemBlock(SOLAR_CELL).setRegistryName(Objects.requireNonNull(SOLAR_CELL.getRegistryName())));
-
-        //event.getRegistry().register(new ItemBlock(FURNACE_GENERATOR).setRegistryName(Objects.requireNonNull(FURNACE_GENERATOR.getRegistryName())));
-        event.getRegistry().register(new ItemBlock(GLOWSTONE_GENERATOR).setRegistryName(Objects.requireNonNull(GLOWSTONE_GENERATOR.getRegistryName())));
         event.getRegistry().register(new ItemBlock(GLOWSTONE_CHARGER).setRegistryName(Objects.requireNonNull(GLOWSTONE_CHARGER.getRegistryName())));
-
+        event.getRegistry().register(new ItemBlock(STEAM_GENERATOR).setRegistryName(Objects.requireNonNull(STEAM_GENERATOR.getRegistryName())));
     }
 
 
@@ -124,20 +119,20 @@ public class ModInit {
         event.getRegistry().registerAll(ALUMINIUM_ORE);
         event.getRegistry().registerAll(SILICON_ORE);
         event.getRegistry().registerAll(SOLAR_CELL);
-        NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
-        GameRegistry.registerTileEntity(TileEntityGlowstoneGenerator.class,
-                new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_generator"));
 
         NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
         GameRegistry.registerTileEntity(TileEntityGlowstoneCharger.class,
                 new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_charger"));
         event.getRegistry().registerAll(GLOWSTONE_CHARGER);
 
-        //event.getRegistry().registerAll(FURNACE_GENERATOR);
-        event.getRegistry().registerAll(GLOWSTONE_GENERATOR);
         NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
         GameRegistry.registerTileEntity(TileEntitySolarCell.class,
                 new ResourceLocation(ElectricRevolutionMod.MODID + ":solarcell"));
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
+        GameRegistry.registerTileEntity(TileEntitySteamGenerator.class,
+                new ResourceLocation(ElectricRevolutionMod.MODID + ":steam_generator"));
+        event.getRegistry().registerAll(STEAM_GENERATOR);
     }
 
     @SubscribeEvent
@@ -162,9 +157,8 @@ public class ModInit {
         registerRenderer(Item.getItemFromBlock(SILICON_ORE));
         registerRenderer(Item.getItemFromBlock(SOLAR_CELL));
 
-        //registerRenderer(Item.getItemFromBlock(FURNACE_GENERATOR));
-        registerRenderer(Item.getItemFromBlock(GLOWSTONE_GENERATOR));
         registerRenderer(Item.getItemFromBlock(GLOWSTONE_CHARGER));
+        registerRenderer(Item.getItemFromBlock(STEAM_GENERATOR));
     }
 
     private static void loadItems() {
@@ -202,8 +196,6 @@ public class ModInit {
         GameRegistry.addSmelting(new ItemStack(ModInit.LODESTONE_ORE),new ItemStack(MAGNET),1f);
         GameRegistry.addSmelting(new ItemStack(ModInit.ALUMINIUM_ORE),new ItemStack(ALUMINIUM_INGOT),1f);
         GameRegistry.addSmelting(new ItemStack(ModInit.SILICON_ORE),new ItemStack(SILICON_INGOT),1f);
-
-
     }
 
 }

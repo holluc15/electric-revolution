@@ -4,12 +4,12 @@ import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.glowstonecharger.ContainerGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonecharger.GuiGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonecharger.TileEntityGlowstoneCharger;
-import com.teamtsla.electricrevolution.glowstonegenerator.ContainerGlowstoneGenerator;
-import com.teamtsla.electricrevolution.glowstonegenerator.GuiGlowstoneGenerator;
-import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
 import com.teamtsla.electricrevolution.solarcell.ContainerSolarCell;
 import com.teamtsla.electricrevolution.solarcell.GuiSolarCell;
 import com.teamtsla.electricrevolution.solarcell.TileEntitySolarCell;
+import com.teamtsla.electricrevolution.steamgenerator.ContainerSteamGenerator;
+import com.teamtsla.electricrevolution.steamgenerator.GuiSteamGenerator;
+import com.teamtsla.electricrevolution.steamgenerator.TileEntitySteamGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,10 +23,6 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        if(ID == ElectricRevolutionMod.GUI_GLOWSTONE_GENERATOR) {
-            return new ContainerGlowstoneGenerator(player.inventory,
-                    (TileEntityGlowstoneGenerator)world.getTileEntity(new BlockPos(x,y,z)));
-        }
         if(ID == ElectricRevolutionMod.GUI_SOLAR_CELL) {
             return new ContainerSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
@@ -35,6 +31,10 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerGlowstoneCharger(player.inventory,
                     (TileEntityGlowstoneCharger) world.getTileEntity(new BlockPos(x,y,z)));
         }
+        if(ID == ElectricRevolutionMod.GUI_STEAM_GENERATOR) {
+            return new ContainerSteamGenerator(player.inventory,
+                    (TileEntitySteamGenerator) world.getTileEntity(new BlockPos(x,y,z)));
+        }
         return null;
     }
 
@@ -42,10 +42,6 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        if(ID == ElectricRevolutionMod.GUI_GLOWSTONE_GENERATOR) {
-            return new GuiGlowstoneGenerator(player.inventory,
-                    (TileEntityGlowstoneGenerator)world.getTileEntity(new BlockPos(x,y,z)));
-        }
         if(ID == ElectricRevolutionMod.GUI_SOLAR_CELL) {
             return new GuiSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
@@ -53,6 +49,10 @@ public class GuiHandler implements IGuiHandler {
         if(ID == ElectricRevolutionMod.GUI_GLOWSTONE_CHARGER) {
             return new GuiGlowstoneCharger(player.inventory,
                     (TileEntityGlowstoneCharger) world.getTileEntity(new BlockPos(x,y,z)));
+        }
+        if(ID == ElectricRevolutionMod.GUI_STEAM_GENERATOR) {
+            return new GuiSteamGenerator(player.inventory,
+                    (TileEntitySteamGenerator) world.getTileEntity(new BlockPos(x,y,z)));
         }
         return null;
     }

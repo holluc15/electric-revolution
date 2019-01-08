@@ -1,4 +1,4 @@
-package com.teamtsla.electricrevolution.glowstonegenerator;
+package com.teamtsla.electricrevolution.steamgenerator;
 
 import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.BlockBase;
@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockGlowstoneGenerator extends BlockBase
+public class BlockSteamGenerator extends BlockBase
 {
-    public BlockGlowstoneGenerator(String name)
+    public BlockSteamGenerator(String name)
     {
         super(name, Material.IRON, ModInit.electricRevolutionTab);
     }
@@ -27,7 +27,7 @@ public class BlockGlowstoneGenerator extends BlockBase
     {
         if(!worldIn.isRemote)
         {
-            playerIn.openGui(ElectricRevolutionMod.instance, ElectricRevolutionMod.GUI_GLOWSTONE_GENERATOR,
+            playerIn.openGui(ElectricRevolutionMod.instance, ElectricRevolutionMod.GUI_STEAM_GENERATOR,
                     worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
@@ -43,14 +43,16 @@ public class BlockGlowstoneGenerator extends BlockBase
     @Override
     public TileEntity createTileEntity(World world, IBlockState state)
     {
-        return new TileEntityGlowstoneGenerator();
+        return new TileEntitySteamGenerator();
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
-        TileEntityGlowstoneGenerator tileentity = (TileEntityGlowstoneGenerator)worldIn.getTileEntity(pos);
+        TileEntitySteamGenerator tileentity = (TileEntitySteamGenerator)worldIn.getTileEntity(pos);
         worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(0)));
+        worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(1)));
+        worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(2)));
         super.breakBlock(worldIn, pos, state);
     }
 }

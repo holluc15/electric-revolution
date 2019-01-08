@@ -51,6 +51,7 @@ public class BlockGlowstoneCharger extends BlockBase
     {
         TileEntityGlowstoneCharger tileentity = (TileEntityGlowstoneCharger)worldIn.getTileEntity(pos);
         worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(0)));
+        worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(1)));
         super.breakBlock(worldIn, pos, state);
     }
 }

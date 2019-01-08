@@ -19,8 +19,8 @@ public class ElectricRevolutionMod
 
     public static final int GUI_FURNACE_GENERATOR = 1;
     public static final int GUI_SOLAR_CELL = 2;
-    public static final int GUI_GLOWSTONE_GENERATOR = 3;
     public static final int GUI_GLOWSTONE_CHARGER = 4;
+    public static final int GUI_STEAM_GENERATOR = 5;
 
     @Mod.Instance
     public static ElectricRevolutionMod instance;

@@ -2,7 +2,6 @@ package com.teamtsla.electricrevolution.solarcell;
 
 import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.BlockBase;
-import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
 import com.teamtsla.electricrevolution.init.ModInit;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

@@ -15,12 +15,11 @@ tile.lithiumore.name=Lithium Ore
 tile.lodestoneore.name=Magnetic Ore
 tile.aluminiumore.name=Aluminium Ore
 tile.siliconore.name=Silicon Ore
+
 tile.solarcell.name=Solar Cell
-tile.furnace_generator.name=Furnace Generator
-tile.glowstone_generator.name=Glowstone Generator
-
-container.glowstone_generator=Glowstone Generator
-container.solarcell=Solar Cell
-
-container.glowstone_charger=Glowstone Charger
 tile.glowstone_charger.name=Glowstone Charger
+tile.steam_generator.name=Steam Generator
+
+container.solarcell=Solar Cell
+container.glowstone_charger=Glowstone Charger
+container.steam_generator=Steam Generator
