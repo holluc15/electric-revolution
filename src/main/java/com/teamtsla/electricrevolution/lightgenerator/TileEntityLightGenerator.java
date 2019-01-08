@@ -111,7 +111,7 @@ public class TileEntityLightGenerator extends TileEntity implements ITickable
         compound.setTag("Inventory", this.handler.serializeNBT());
         compound.setInteger("CookTime", this.cookTime);
         compound.setString("Name", getDisplayName().toString());
-        this.storage.writeToBNT(compound);
+        this.storage.writeToNBT(compound);
         return compound;
     }
 
@@ -123,7 +123,7 @@ public class TileEntityLightGenerator extends TileEntity implements ITickable
         int ct = compound.getInteger("CookTime");
         this.cookTime = compound.getInteger("CookTime");
         this.customName = compound.getString("Name");
-        this.storage.readFromBNT(compound);
+        this.storage.readFromNBT(compound);
     }
 
     @Override
