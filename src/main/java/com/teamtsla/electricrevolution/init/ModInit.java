@@ -7,6 +7,8 @@ import com.teamtsla.electricrevolution.glowstonegenerator.BlockGlowstoneGenerato
 import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
 import com.teamtsla.electricrevolution.gui.GuiHandler;
 import com.teamtsla.electricrevolution.items.*;
+import com.teamtsla.electricrevolution.lightgenerator.BlockLightGenerator;
+import com.teamtsla.electricrevolution.lightgenerator.TileEntityLightGenerator;
 import com.teamtsla.electricrevolution.solarcell.SolarCell;
 import com.teamtsla.electricrevolution.solarcell.TileEntitySolarCell;
 import net.minecraft.block.Block;
@@ -48,6 +50,7 @@ public class ModInit {
 
     public static Block FURNACE_GENERATOR;
     public static Block GLOWSTONE_GENERATOR;
+    public static Block LIGHT_GENERATOR;
 
     public static CreativeTabs electricRevolutionTab = new CreativeTabs("electricRevolution"){
         @Override
@@ -81,6 +84,7 @@ public class ModInit {
 
         FURNACE_GENERATOR = new FurnaceGenerator("furnace_generator");
         GLOWSTONE_GENERATOR = new BlockGlowstoneGenerator("glowstone_generator");
+        LIGHT_GENERATOR = new BlockLightGenerator("light_generator");
 
     }
 
@@ -105,6 +109,7 @@ public class ModInit {
         event.getRegistry().register(new ItemBlock(SOLAR_CELL).setRegistryName(Objects.requireNonNull(SOLAR_CELL.getRegistryName())));
 
         //event.getRegistry().register(new ItemBlock(FURNACE_GENERATOR).setRegistryName(Objects.requireNonNull(FURNACE_GENERATOR.getRegistryName())));
+        event.getRegistry().register(new ItemBlock(LIGHT_GENERATOR).setRegistryName(Objects.requireNonNull(LIGHT_GENERATOR.getRegistryName())));
         event.getRegistry().register(new ItemBlock(GLOWSTONE_GENERATOR).setRegistryName(Objects.requireNonNull(GLOWSTONE_GENERATOR.getRegistryName())));
     }
 
@@ -127,6 +132,12 @@ public class ModInit {
         NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
         GameRegistry.registerTileEntity(TileEntitySolarCell.class,
                 new ResourceLocation(ElectricRevolutionMod.MODID + ":solarcell"));
+
+
+        event.getRegistry().registerAll(LIGHT_GENERATOR);
+        NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
+        GameRegistry.registerTileEntity(TileEntityLightGenerator.class,
+                new ResourceLocation(ElectricRevolutionMod.MODID + ":light_generator"));
     }
 
     @SubscribeEvent
@@ -153,6 +164,7 @@ public class ModInit {
 
         //registerRenderer(Item.getItemFromBlock(FURNACE_GENERATOR));
         registerRenderer(Item.getItemFromBlock(GLOWSTONE_GENERATOR));
+        registerRenderer(Item.getItemFromBlock(LIGHT_GENERATOR));
     }
 
     private static void loadItems() {

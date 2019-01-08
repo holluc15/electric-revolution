@@ -4,6 +4,9 @@ import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.glowstonegenerator.ContainerGlowstoneGenerator;
 import com.teamtsla.electricrevolution.glowstonegenerator.GuiGlowstoneGenerator;
 import com.teamtsla.electricrevolution.glowstonegenerator.TileEntityGlowstoneGenerator;
+import com.teamtsla.electricrevolution.lightgenerator.ContainerLightGenerator;
+import com.teamtsla.electricrevolution.lightgenerator.GuiLightGenerator;
+import com.teamtsla.electricrevolution.lightgenerator.TileEntityLightGenerator;
 import com.teamtsla.electricrevolution.solarcell.ContainerSolarCell;
 import com.teamtsla.electricrevolution.solarcell.GuiSolarCell;
 import com.teamtsla.electricrevolution.solarcell.TileEntitySolarCell;
@@ -28,6 +31,10 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
         }
+        if(ID == ElectricRevolutionMod.GUI_LIGHT_GENERATOR) {
+            return new ContainerLightGenerator(player.inventory,
+                    (TileEntityLightGenerator)world.getTileEntity(new BlockPos(x,y,z)));
+        }
         return null;
     }
 
@@ -42,6 +49,10 @@ public class GuiHandler implements IGuiHandler {
         if(ID == ElectricRevolutionMod.GUI_SOLAR_CELL) {
             return new GuiSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
+        }
+        if(ID == ElectricRevolutionMod.GUI_LIGHT_GENERATOR) {
+            return new GuiLightGenerator(player.inventory,
+                    (TileEntityLightGenerator) world.getTileEntity(new BlockPos(x,y,z)));
         }
         return null;
     }
