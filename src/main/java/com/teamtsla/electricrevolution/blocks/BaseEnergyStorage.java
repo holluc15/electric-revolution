@@ -49,7 +49,7 @@ public class BaseEnergyStorage implements IEnergyStorage {
             this.energy += charge;
             return charge;
         }
-        return 0;
+        return charge;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class BaseEnergyStorage implements IEnergyStorage {
             this.energy -= discharge;
             return discharge;
         }
-        return 0;
+        return discharge;
     }
 
     @Override
@@ -128,7 +128,7 @@ public class BaseEnergyStorage implements IEnergyStorage {
         this.dischargeSpeed = dischargeSpeed;
     }
 
-    public void readFromBNT(NBTTagCompound compound)
+    public void readFromNBT(NBTTagCompound compound)
     {
         // DEBUG
         /*
@@ -145,7 +145,7 @@ public class BaseEnergyStorage implements IEnergyStorage {
         setDischargeSpeed(compound.getInteger("dischargeSpeed"));
     }
 
-    public void writeToBNT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         // DEBUG
         /*
@@ -160,5 +160,6 @@ public class BaseEnergyStorage implements IEnergyStorage {
         compound.setInteger("energy", getEnergyStored());
         compound.setInteger("chargeSpeed", getChargeSpeed());
         compound.setInteger("dischargeSpeed", getDischargeSpeed());
+        return compound;
     }
 }

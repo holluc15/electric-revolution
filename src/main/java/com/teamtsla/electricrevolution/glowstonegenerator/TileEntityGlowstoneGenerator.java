@@ -5,8 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -87,7 +85,7 @@ public class TileEntityGlowstoneGenerator extends TileEntity implements ITickabl
         compound.setTag("Inventory", this.handler.serializeNBT());
         compound.setInteger("CookTime", this.cookTime);
         compound.setString("Name", getDisplayName().toString());
-        this.storage.writeToBNT(compound);
+        this.storage.writeToNBT(compound);
         return compound;
     }
 
@@ -99,7 +97,7 @@ public class TileEntityGlowstoneGenerator extends TileEntity implements ITickabl
         int ct = compound.getInteger("CookTime");
         this.cookTime = compound.getInteger("CookTime");
         this.customName = compound.getString("Name");
-        this.storage.readFromBNT(compound);
+        this.storage.readFromNBT(compound);
     }
 
     @Override
