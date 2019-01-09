@@ -3,10 +3,15 @@ package com.teamtsla.electricrevolution.init;
 
 import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.blocks.*;
+
 import com.teamtsla.electricrevolution.glowstonecharger.BlockGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonecharger.TileEntityGlowstoneCharger;
+
+
 import com.teamtsla.electricrevolution.gui.GuiHandler;
 import com.teamtsla.electricrevolution.items.*;
+import com.teamtsla.electricrevolution.lightgenerator.BlockLightGenerator;
+import com.teamtsla.electricrevolution.lightgenerator.TileEntityLightGenerator;
 import com.teamtsla.electricrevolution.solarcell.SolarCell;
 import com.teamtsla.electricrevolution.solarcell.TileEntitySolarCell;
 import com.teamtsla.electricrevolution.steamgenerator.BlockSteamGenerator;
@@ -47,10 +52,15 @@ public class ModInit {
     public static Block ALUMINIUM_ORE;
     public static Block SILICON_ORE;
 
+
     public static Block SOLAR_CELL;
     public static Block GLOWSTONE_CHARGER;
     public static Block STEAM_GENERATOR;
 
+
+    public static Block FURNACE_GENERATOR;
+    public static Block GLOWSTONE_GENERATOR;
+    public static Block LIGHT_GENERATOR;
 
     public static CreativeTabs electricRevolutionTab = new CreativeTabs("electricRevolution"){
         @Override
@@ -81,8 +91,14 @@ public class ModInit {
         SILICON_INGOT = new SiliconIngot("siliconingot");
 
         SOLAR_CELL = new SolarCell("solarcell");
+
         GLOWSTONE_CHARGER = new BlockGlowstoneCharger("glowstone_charger");
         STEAM_GENERATOR = new BlockSteamGenerator("steam_generator");
+
+
+        LIGHT_GENERATOR = new BlockLightGenerator("light_generator");
+
+
     }
 
 
@@ -104,9 +120,15 @@ public class ModInit {
         event.getRegistry().register(new ItemBlock(ALUMINIUM_ORE).setRegistryName(Objects.requireNonNull(ALUMINIUM_ORE.getRegistryName())));
         event.getRegistry().register(new ItemBlock(SILICON_ORE).setRegistryName(Objects.requireNonNull(SILICON_ORE.getRegistryName())));
 
+
         event.getRegistry().register(new ItemBlock(SOLAR_CELL).setRegistryName(Objects.requireNonNull(SOLAR_CELL.getRegistryName())));
         event.getRegistry().register(new ItemBlock(GLOWSTONE_CHARGER).setRegistryName(Objects.requireNonNull(GLOWSTONE_CHARGER.getRegistryName())));
         event.getRegistry().register(new ItemBlock(STEAM_GENERATOR).setRegistryName(Objects.requireNonNull(STEAM_GENERATOR.getRegistryName())));
+
+
+        event.getRegistry().register(new ItemBlock(LIGHT_GENERATOR).setRegistryName(Objects.requireNonNull(LIGHT_GENERATOR.getRegistryName())));
+
+
     }
 
 
@@ -124,7 +146,6 @@ public class ModInit {
         GameRegistry.registerTileEntity(TileEntityGlowstoneCharger.class,
                 new ResourceLocation(ElectricRevolutionMod.MODID + ":glowstone_charger"));
         event.getRegistry().registerAll(GLOWSTONE_CHARGER);
-
         NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
         GameRegistry.registerTileEntity(TileEntitySolarCell.class,
                 new ResourceLocation(ElectricRevolutionMod.MODID + ":solarcell"));
@@ -133,6 +154,11 @@ public class ModInit {
         GameRegistry.registerTileEntity(TileEntitySteamGenerator.class,
                 new ResourceLocation(ElectricRevolutionMod.MODID + ":steam_generator"));
         event.getRegistry().registerAll(STEAM_GENERATOR);
+
+        event.getRegistry().registerAll(LIGHT_GENERATOR);
+        NetworkRegistry.INSTANCE.registerGuiHandler(ElectricRevolutionMod.instance, new GuiHandler());
+        GameRegistry.registerTileEntity(TileEntityLightGenerator.class,
+                new ResourceLocation(ElectricRevolutionMod.MODID + ":light_generator"));
     }
 
     @SubscribeEvent
@@ -157,8 +183,12 @@ public class ModInit {
         registerRenderer(Item.getItemFromBlock(SILICON_ORE));
         registerRenderer(Item.getItemFromBlock(SOLAR_CELL));
 
+
         registerRenderer(Item.getItemFromBlock(GLOWSTONE_CHARGER));
         registerRenderer(Item.getItemFromBlock(STEAM_GENERATOR));
+
+        registerRenderer(Item.getItemFromBlock(LIGHT_GENERATOR));
+
     }
 
     private static void loadItems() {

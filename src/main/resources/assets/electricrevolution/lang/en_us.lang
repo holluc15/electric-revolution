@@ -21,5 +21,9 @@ tile.glowstone_charger.name=Glowstone Charger
 tile.steam_generator.name=Steam Generator
 
 container.solarcell=Solar Cell
+<<<<<<< HEAD
 container.glowstone_charger=Glowstone Charger
 container.steam_generator=Steam Generator
+=======
+container.light_generator=Light Source
+>>>>>>> origin/master

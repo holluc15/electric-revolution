@@ -4,6 +4,9 @@ import com.teamtsla.electricrevolution.ElectricRevolutionMod;
 import com.teamtsla.electricrevolution.glowstonecharger.ContainerGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonecharger.GuiGlowstoneCharger;
 import com.teamtsla.electricrevolution.glowstonecharger.TileEntityGlowstoneCharger;
+import com.teamtsla.electricrevolution.lightgenerator.ContainerLightGenerator;
+import com.teamtsla.electricrevolution.lightgenerator.GuiLightGenerator;
+import com.teamtsla.electricrevolution.lightgenerator.TileEntityLightGenerator;
 import com.teamtsla.electricrevolution.solarcell.ContainerSolarCell;
 import com.teamtsla.electricrevolution.solarcell.GuiSolarCell;
 import com.teamtsla.electricrevolution.solarcell.TileEntitySolarCell;
@@ -27,9 +30,9 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
         }
-        if(ID == ElectricRevolutionMod.GUI_GLOWSTONE_CHARGER) {
-            return new ContainerGlowstoneCharger(player.inventory,
-                    (TileEntityGlowstoneCharger) world.getTileEntity(new BlockPos(x,y,z)));
+        if(ID == ElectricRevolutionMod.GUI_LIGHT_GENERATOR) {
+            return new ContainerLightGenerator(player.inventory,
+                    (TileEntityLightGenerator)world.getTileEntity(new BlockPos(x,y,z)));
         }
         if(ID == ElectricRevolutionMod.GUI_STEAM_GENERATOR) {
             return new ContainerSteamGenerator(player.inventory,
@@ -46,9 +49,9 @@ public class GuiHandler implements IGuiHandler {
             return new GuiSolarCell(player.inventory,
                     (TileEntitySolarCell) world.getTileEntity(new BlockPos(x,y,z)));
         }
-        if(ID == ElectricRevolutionMod.GUI_GLOWSTONE_CHARGER) {
-            return new GuiGlowstoneCharger(player.inventory,
-                    (TileEntityGlowstoneCharger) world.getTileEntity(new BlockPos(x,y,z)));
+        if(ID == ElectricRevolutionMod.GUI_LIGHT_GENERATOR) {
+            return new GuiLightGenerator(player.inventory,
+                    (TileEntityLightGenerator) world.getTileEntity(new BlockPos(x,y,z)));
         }
         if(ID == ElectricRevolutionMod.GUI_STEAM_GENERATOR) {
             return new GuiSteamGenerator(player.inventory,
